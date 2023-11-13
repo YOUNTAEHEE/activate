@@ -3,10 +3,15 @@ const btns = main.querySelectorAll('li');
 const boxs = main.querySelectorAll('article');
 
 btns.forEach((btn, idx) => {
-	btn.addEventListener('click', () => {
-		//만약 클릭한 버튼에 클래스 .on이 있다면 리턴으로 함수 실행 중지.
-		//만약 클릭한 버튼에 on이 없다면 해당 조건문이 무시되면서 activation함수 호출
-		if (btns[idx].classList.contains('on')) return;
+	btn.addEventListener('click', (e) => {
+		console.log(e.currentTarget);
+
+		console.log(e.target);
+		//e.currentTarget:js이벤트 구문에 연결되어 있는선택
+		//e.target:실제 화면상에서 이벤트가 발생한 대상선택
+		//만약 연결되어있는 선택자가 a의 링크 이동처럼 특정기능이 있는 요소면 해당기능 막아야될 필요 있음.
+		e.preventDefault(); //링크기능 막고 스크립트 기능 우선시
+		if (e.currentTarget.classList.contains('on')) return;
 		[btns, boxs].forEach((el) => {
 			activation(el, idx);
 		});
