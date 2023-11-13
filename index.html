@@ -10,19 +10,43 @@
 </head>
 
 <body>
-  <main>
-    <ul>
-      <li><span>button1</span></li>
-      <li>button2</li>
-      <li>button3</li>
-    </ul>
+  <!--_self:해당 탭이 변경되면서 링크 이동, _blank:새로운 탭으로 이동하면서 링크 이동-->
+  <!-- <a href="https://www.naver.com" target="_self">네이버</a> -->
+  <nav></nav>
 
-    <section>
-      <article>TAB1</article>
-      <article>TAB2</article>
-      <article>TAB3</article>
-    </section>
-  </main>
+  <script>
+    //DOM요소의 속성값 제어
+    //DOM.getAttribute('속성명'):해당 속성명의 값 가져오기
+    //DOM.setAttribute('속성명','변경할 속성값'):해당 속성명의 값을 변경
+
+
+    //위의 정보값 url, target, 이름을 각각 객체로 정의한 다음 배열로 묶어서 해당 a요소로 변경되도록 처리
+    const info = [
+      { url: "https://www.naver.com", target: "_blank", name: "네이버" },
+      { url: "https://www.nate.com", target: "_self", name: "네이트" },
+      { url: "https://www.google.com", target: "_blank", name: "구글" },
+    ]
+    // 동적으로 DOM생성하기
+    /*방법1 const nav = document.querySelector('nav');
+    nav.innerHTML = `<a href='${info[0].url}' target='${info[0].target}'>${info[0].name}</a>`
+*/
+//특벙 부모요소안에 반복적인 돔요소를 동적생성하기 위해서는 문자열을 초기화하는 변수를 만들고 +=를 활용해서 반복추가할 태그를 문자열형태로 계속 쌓아놓음 마지막 해당 돔요소에 변수에 있는 반복태그 문자열을 한번에 꽂아넣음
+    let tags = '';
+    tags += `<a href='${info[0].url}' target='${info[0].target}'>${info[0].name}</a>`;
+    tags += `<a href='${info[1].url}' target='${info[1].target}'>${info[1].name}</a>`;
+    nav.innerHTML = tags;
+    /*
+     동적으로 DOM생성하기
+     
+    방법1:
+    innerHTML을 이용해서 문자열로 직접 동적 태그 생성(선택자의 기존 자식 내용을 없애면서 덮어쓰기)
+예.    const nav = document.querySelector('nav');
+    nav.innerHTML = `<a href='${info[0].url}' target='${info[0].target}'>${info[0].name}</a>`
+    nav.innerHTML = `<a href='${info[1].url}' target='${info[1].target}'>${info[1].name}</a>`//이게 문제가 이게 0번째 했던거 덮어쓰기되서 0번쨰한거 없어짐.
+
+
+    */
+  </script>
 </body>
 
 </html>
